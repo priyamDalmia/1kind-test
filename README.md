@@ -6,7 +6,12 @@
 1. Create, host and launch a postgresql database on AWS.
 2. Build a small python app to populate the database with articles scrapped from the web.
 
+# Getting Started. 
 
+# Running the code.
+
+1. Populate the *config.yaml* file with the credentails provided. Once that is completed, run the commands `python3 tests/test_remote_connection.py`. The output should confirm that a succesfull connection has been established. 
+2. 
 
 
 

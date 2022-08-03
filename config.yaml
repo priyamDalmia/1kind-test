@@ -1,0 +1,5 @@
+postgres:
+  - hostname: "ec2-52-63-173-178.ap-southeast-2.compute.amazonaws.com"
+  - user: "postgres"
+  - password: "mypassword"
+  - database: "postgres"
