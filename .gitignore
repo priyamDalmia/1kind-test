@@ -130,3 +130,7 @@ dmypy.json
 
 # temp files 
 temp/
+
+# IMP: DO NOT REMOVE
+config.yaml
+*ipynb
