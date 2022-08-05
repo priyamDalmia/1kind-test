@@ -3,7 +3,6 @@ import yaml
 
 def test_remote_connection(config):
     try:
-        breakpoint()
         connection = psycopg2.connect(
                 user=config["user"], 
                 password=config["password"], 

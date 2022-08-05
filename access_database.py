@@ -40,12 +40,29 @@ class DB_Reader:
         GET_ITEMS = f'''SELECT * FROM {table_name}'''
         self.cursor.execute(GET_ITEMS)
         return self.cursor.fetchall()
+    
+    def show_tables(self):
+        TABLE_INFO = '''SELECT * FROM %s'''
+        
+        self.cursor.execute(TABLE_INFO % TABLE_POSITIVE)
+        table_info = self.cursor.description
+        COL_NAMES = [col.name for col in table_info]
+        print("\nTable Name: ", {TABLE_POSITIVE})
+        print("With columns: ", COL_NAMES)
+        print(table_info)
+
+        self.cursor.execute(TABLE_INFO % TABLE_NEGATIVE)
+        table_info = self.cursor.description
+        COL_NAMES = [col.name for col in table_info]
+        print("\nTable Name: ", {TABLE_NEGATIVE})
+        print("With columns: ", COL_NAMES)
+        print(table_info)
 
 class DB_Writer:
     def __init__(self, config, scraper):
         self.config = config
         self.scraper = scraper
-        self.delete_table = True
+        self.delete_table = config["delete_tables"]
 
         # setup connections and get cursor
         self.open_connection()
@@ -61,9 +78,7 @@ class DB_Writer:
         # if not creates the tables using the schema
         if self.delete_table:
             # first delete all tables
-            self.cursor.execute(DELETE_TABLE % TABLE_POSITIVE)
-            self.cursor.execute(DELETE_TABLE % TABLE_NEGATIVE)
-            print("Deleted exsiting tables!")
+            self.delete_tables()
 
         self.cursor.execute(GET_TABLES)
         list_tables = self.cursor.fetchall()
@@ -74,6 +89,12 @@ class DB_Writer:
                 print(f"table -> {table_name} not found. new table created!")
                 self.cursor.execute(TABLE_SCHEMA % (table_name))
                 self.connector.commit()
+    
+    def delete_tables(self):
+        self.cursor.execute(DELETE_TABLE % TABLE_POSITIVE)
+        self.cursor.execute(DELETE_TABLE % TABLE_NEGATIVE)
+        print("Deleted exsiting tables!")
+
 
     def record_to_database(self):
         # setup tables and start scraping and storing resutls.
@@ -125,7 +146,7 @@ class DB_Writer:
             return True
         except: 
             # ROLLBACK TRANSACTION if insert error
-            traceback.print_exc()
+            # traceback.print_exc()
             self.connector.rollback()
             return False
 
@@ -137,8 +158,5 @@ if __name__ == "__main__":
     with open('config.yaml') as f:
         config = yaml.load(f, Loader = yaml.FullLoader)
 
-    #reader = DB_Reader(config)
-    #data = reader.read_from_table()
-    writer = DB_Writer(config, scraper)
-    writer.record_to_database()
-    breakpoint()
+    #writer = DB_Writer(config, scraper)
+    #writer.record_to_database()
