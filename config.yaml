@@ -1,7 +1,7 @@
 postgres:
-  hostname: "ec2-52-63-173-178.ap-southeast-2.compute.amazonaws.com"
-  user: "postgres"
-  password: "mypassword"
+  hostname: ""
+  user: ""
+  password: ""
   database: "firstdatabase"
 
 database:
@@ -9,4 +9,5 @@ database:
   keyword: "nft"
   num_records: 300
 
+delete_tables: False
 
