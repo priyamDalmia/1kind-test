@@ -28,10 +28,12 @@ A general web-scrapper and PostgrSQL database manager!
 
 Don't beielve strangers on the internet. Use `run.py` to recreate the results yourself.
 
-`python3 run.py --checkhealth`: Shows if the cofiguration is correct and the DB can be accessed.   
-`python3 run.py --show_tables`: Prints the table names, schemas and other details. 
-`python3 run.py --clean_run`: Will delete the existing tables and re-scrape the sites. Use this command to scrape websites for different keywords. 
+* `python3 run.py --checkhealth`: Shows if the cofiguration is correct and the DB can be accessed.   
+
+* `python3 run.py --show_tables`: Prints the table names, schemas and other details. 
+
+* `python3 run.py --clean_run`: Will delete the existing tables and re-scrape the sites. Use this command to scrape websites for different keywords. 
 
 
-NOTE: `config.yaml` can be used to overwrite in file default configuration to allow a central control to all configurable parameters. This means that the arguments in this file take precednce over all default cofig files. 
+NOTE: `config.yaml` can be used to overwrite the default infile configuration. This allows for a central control of all configurable parameters. Arguments in this file take precedence over all default config files. 
 
