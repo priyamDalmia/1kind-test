@@ -10,7 +10,6 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--checkhealth", action="store_true", description="")
 parser.add_argument("--show_tables", action="store_true", description="")
 parser.add_argument("--clean_run", action="store_true", description="")
-parser.add_argument("--add", action="store_true", description="")
 
 ## Run Checks and See if the setup is complete 
 def checkhealth():
