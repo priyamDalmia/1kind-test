@@ -45,7 +45,7 @@ class DB_Writer:
     def __init__(self, config, scraper):
         self.config = config
         self.scraper = scraper
-        self.delete_table = True 
+        self.delete_table = True
 
         # setup connections and get cursor
         self.open_connection()
@@ -110,7 +110,7 @@ class DB_Writer:
             store_sucess = self.store_item(table, item_data)
             items_stored[table] += int(store_sucess)
             total_items_stored = sum(list(items_stored.values()))
-            if total_items_stored%5 == 0:
+            if total_items_stored%10 == 0:
                 print(f"Total items stored into the database: {total_items_stored}")
         
         # print total items stored in each data table.
@@ -137,8 +137,8 @@ if __name__ == "__main__":
     with open('config.yaml') as f:
         config = yaml.load(f, Loader = yaml.FullLoader)
 
-    reader = DB_Reader(config)
-    data = reader.read_from_table()
-    #writer = DB_Writer(config, scraper)
-    #writer.record_to_database()
+    #reader = DB_Reader(config)
+    #data = reader.read_from_table()
+    writer = DB_Writer(config, scraper)
+    writer.record_to_database()
     breakpoint()

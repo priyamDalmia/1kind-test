@@ -40,7 +40,7 @@ class DB_Writer:
     def __init__(self, config, scraper):
         self.config = config
         self.scraper = scraper
-        self.delete_table = True 
+        self.delete_table = False
 
         # TODO setup connections here
         self.open_connection()
@@ -102,6 +102,7 @@ class DB_Writer:
                     item_sentiment)
                     # possibly record metadata also
             
+            breakpoint()
             store_sucess = self.store_item(table, item_data)
             items_stored[table] += int(store_sucess)
             total_items_stored = sum(list(items_stored.values()))
